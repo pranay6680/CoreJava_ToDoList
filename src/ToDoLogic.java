@@ -15,13 +15,16 @@ public class ToDoLogic  {
     ToDoModel tdm = new ToDoModel();
 
     public void addMethod() throws IOException {
-        System.out.print("Enter Key or enter 'e' to exit");
+        System.out.println("Enter Item num or enter 'e' to cancel");
         String proc = br.readLine();
         if (proc.equalsIgnoreCase("e")) {
             return;
         }
-        System.out.println("Enter Item num");
         tdm.ins = Integer.parseInt(br.readLine());
+        if(hs.containsKey(tdm.ins)){
+            System.out.println("Item num already exists");
+            return;
+        }
         System.out.println("Enter value");
         tdm.ss = br.readLine();
         hs.put(tdm.ins, tdm.ss + ":::" + tdm.str);
