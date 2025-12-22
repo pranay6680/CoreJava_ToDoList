@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ToDoServiceImpl implements ToDoService {
 
@@ -10,7 +13,7 @@ public class ToDoServiceImpl implements ToDoService {
         this.br = br;
         this.hs = hs;
     }
-
+    DateTime dt = new DateTime();
     ToDoModel tdm = new ToDoModel();
 
     public void addMethod() {
@@ -25,8 +28,10 @@ public class ToDoServiceImpl implements ToDoService {
             }
                 System.out.println("Enter value");
                 tdm.ss = br.readLine();
-                hs.put(tdm.ins, tdm.ss + ":::" + tdm.str);
-                System.out.println(hs);
+                hs.put(tdm.ins, tdm.ss  + tdm.crtd + dt.dateTime + tdm.stat + tdm.start);
+                for(Map.Entry<Integer, String> h : hs.entrySet()) {
+                System.out.println(h.getKey() + " = " + h.getValue());
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -40,11 +45,13 @@ public class ToDoServiceImpl implements ToDoService {
                 tdm.ins = inp;
                 System.out.print("Change With : ");
                 tdm.ss = br.readLine();
-                hs.put(tdm.ins, tdm.ss + ":::" + tdm.str);
+                hs.put(tdm.ins, tdm.ss + tdm.stat + tdm.start);
             } else {
                 System.out.println("To Do Not Found");
             }
-            System.out.println(hs);
+            for(Map.Entry<Integer, String> h : hs.entrySet()) {
+                System.out.println(h.getKey() + " = " + h.getValue());
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -58,21 +65,23 @@ public class ToDoServiceImpl implements ToDoService {
                 int in = Integer.parseInt(br.readLine());
                 if (hs.containsKey(in)) {
                     String oldValue = hs.get(in);
-                    String[] parts = oldValue.split(":::");
+                    String[] parts = oldValue.split(tdm.stat);
                     String valuePart = parts[0];
                     String newStatus;
 
                     System.out.println("Enter 1 for In Progress, 2 for Done, 3 for exit");
                     int k = Integer.parseInt(br.readLine());
                     if (k == 1) {
-                        newStatus = "IN PROGRESSS";
+                        newStatus = tdm.inProg;
                     } else if (k == 2) {
-                        newStatus = "DONE";
+                        newStatus = tdm.dn;
                     } else {
                         return;
                     }
-                    hs.put(in, valuePart + ":::" + newStatus);
-                    System.out.println(hs);
+                    hs.put(in, valuePart + tdm.stat + newStatus);
+                    for(Map.Entry<Integer, String> h : hs.entrySet()) {
+                        System.out.println(h.getKey() + " = " + h.getValue());
+                    }
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
