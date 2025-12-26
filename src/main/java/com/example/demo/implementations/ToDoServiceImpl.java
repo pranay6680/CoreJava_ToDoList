@@ -1,17 +1,16 @@
-package main.java.com.example.demo.implementations;
-import main.java.com.example.demo.interfaces.ToDoService;
-import main.java.com.example.demo.model.DateTime;
-import main.java.com.example.demo.model.ToDoModel;
+package com.example.demo.implementations;
+import com.example.demo.interfaces.ToDoService;
+import com.example.demo.model.DateTime;
+import com.example.demo.model.ToDoModel;
 import java.io.BufferedReader;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ToDoServiceImpl implements ToDoService {
 
     private BufferedReader br;
-    private HashMap<Integer, String> hs;
+    private Map<Integer, String> hs;
 
-    public ToDoServiceImpl(BufferedReader br, HashMap<Integer, String> hs) {
+    public ToDoServiceImpl(BufferedReader br, Map<Integer, String> hs) {
         this.br = br;
         this.hs = hs;
     }

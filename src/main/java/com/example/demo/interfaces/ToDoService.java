@@ -1,4 +1,4 @@
-package main.java.com.example.demo.interfaces;
+package com.example.demo.interfaces;
 
 public interface ToDoService {
     void addMethod();

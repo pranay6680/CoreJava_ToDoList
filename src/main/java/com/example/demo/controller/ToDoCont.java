@@ -1,15 +1,18 @@
-package main.java.com.example.demo.controller;
-import main.java.com.example.demo.implementations.ToDoServiceImpl;
-import main.java.com.example.demo.interfaces.ToDoService;
+package com.example.demo.controller;
+import com.example.demo.implementations.ToDoServiceImpl;
+import com.example.demo.interfaces.ToDoService;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
+
 
 public class ToDoCont {
     public void m1(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        HashMap<Integer, String> hs = new HashMap<>();
+        Map<Integer, String> hs = new HashMap<>();
 
         ToDoService tdl = new ToDoServiceImpl(br,hs);
 try {

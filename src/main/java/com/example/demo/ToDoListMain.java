@@ -1,11 +1,12 @@
-package main.java.com.example.demo;
-import main.java.com.example.demo.controller.ToDoCont;
+package com.example.demo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class ToDoListMain {
 
     public static void main(String args[]){
-        ToDoCont pp = new ToDoCont();
-        pp.m1();
+        SpringApplication.run(ToDoListMain.class, args);
     }
         }
 
