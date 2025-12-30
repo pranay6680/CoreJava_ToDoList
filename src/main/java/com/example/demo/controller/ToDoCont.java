@@ -1,20 +1,31 @@
 package com.example.demo.controller;
 import com.example.demo.implementations.ToDoServiceImpl;
 import com.example.demo.interfaces.ToDoService;
+import com.example.demo.model.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Component
 public class ToDoCont {
+
+    private ConfigurableApplicationContext ctx;
+
+    public ToDoCont(ConfigurableApplicationContext ctx) {
+        this.ctx = ctx;
+    }
+
     public void m1(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         Map<Integer, String> hs = new HashMap<>();
-
-        ToDoService tdl = new ToDoServiceImpl(br,hs);
+        DateTime dt  = new DateTime();
+        ToDoService tdl = new ToDoServiceImpl(br,hs,dt);
 try {
     while (true) {
         System.out.println("press 1 to Add item");
@@ -25,7 +36,8 @@ try {
         System.out.println("List contians :" + hs.size() + " Items");
         int num = Integer.parseInt(br.readLine());
         if (num == 5) {
-            break;
+            ctx.close();
+            System.exit(0);
         }
         switch (num) {
             case 1: {
@@ -50,6 +62,7 @@ try {
     }
 }catch (Exception e){
     System.out.println(e.getMessage());
-}
+
     }
+}
 }

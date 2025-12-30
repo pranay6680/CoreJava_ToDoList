@@ -2,20 +2,25 @@ package com.example.demo.implementations;
 import com.example.demo.interfaces.ToDoService;
 import com.example.demo.model.DateTime;
 import com.example.demo.model.ToDoModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.util.Map;
 
+@Service
 public class ToDoServiceImpl implements ToDoService {
 
+    ToDoModel tdm = new ToDoModel();
     private BufferedReader br;
     private Map<Integer, String> hs;
-
-    public ToDoServiceImpl(BufferedReader br, Map<Integer, String> hs) {
+    private DateTime dt;
+    public ToDoServiceImpl(BufferedReader br, Map<Integer, String> hs, DateTime dt) {
         this.br = br;
         this.hs = hs;
+        this.dt = dt;
     }
-    DateTime dt = new DateTime();
-    ToDoModel tdm = new ToDoModel();
+
 
     public void addMethod() {
         try {
