@@ -1,33 +1,32 @@
 package com.example.demo.controller;
-import com.example.demo.implementations.ToDoServiceImpl;
 import com.example.demo.interfaces.ToDoService;
-import com.example.demo.model.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
 public class ToDoCont {
 
-    private ConfigurableApplicationContext ctx;
 
-    public ToDoCont(ConfigurableApplicationContext ctx) {
+    private BufferedReader br;
+    private ConfigurableApplicationContext ctx;
+    private Map<Integer, String> hs;
+    private ToDoService tdl;
+
+    @Autowired
+    public ToDoCont(ConfigurableApplicationContext ctx, BufferedReader br, Map<Integer, String> hs, ToDoService tdl) {
         this.ctx = ctx;
+        this.br = br;
+        this.hs = hs;
+        this.tdl = tdl;
     }
 
     public void m1(){
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        Map<Integer, String> hs = new HashMap<>();
-        DateTime dt  = new DateTime();
-        ToDoService tdl = new ToDoServiceImpl(br,hs,dt);
-try {
-    while (true) {
+         try {
+           while (true) {
         System.out.println("press 1 to Add item");
         System.out.println("press 2 to modify");
         System.out.println("press 3 to status update");

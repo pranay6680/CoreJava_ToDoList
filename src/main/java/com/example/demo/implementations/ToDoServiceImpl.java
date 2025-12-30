@@ -2,7 +2,6 @@ package com.example.demo.implementations;
 import com.example.demo.interfaces.ToDoService;
 import com.example.demo.model.DateTime;
 import com.example.demo.model.ToDoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -12,13 +11,14 @@ import java.util.Map;
 public class ToDoServiceImpl implements ToDoService {
 
     ToDoModel tdm = new ToDoModel();
+    DateTime dt = new DateTime();
+
     private BufferedReader br;
     private Map<Integer, String> hs;
-    private DateTime dt;
-    public ToDoServiceImpl(BufferedReader br, Map<Integer, String> hs, DateTime dt) {
+
+    public ToDoServiceImpl(BufferedReader br, Map<Integer, String> hs) {
         this.br = br;
         this.hs = hs;
-        this.dt = dt;
     }
 
 
@@ -106,7 +106,7 @@ public class ToDoServiceImpl implements ToDoService {
                     System.out.println("Entered list num is not matching");
                 }
                 if (hs.isEmpty()) {
-                    System.out.println("list is Empty press 4 to exit");
+                    System.out.println("list is Empty press 5 to exit");
                 }
                 System.out.println("List contains : " + hs.size() + " items");
             } catch (Exception e) {
