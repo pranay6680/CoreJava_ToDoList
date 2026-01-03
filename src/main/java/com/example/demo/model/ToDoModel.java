@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ToDoModel {
     final String start = "START";
     final String stat = "\t Status :";

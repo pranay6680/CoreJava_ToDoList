@@ -1,9 +1,9 @@
 package com.example.demo.interfaces;
 
 public interface ToDoService {
-    void addMethod();
-    void modifyMethod();
-    void statusMethod();
-    void deleteMethod();
+    void addMethod(int key, String value);
+    void modifyMethod(int key, String modValue);
+    void statusMethod(int key, String value, String stat);
+    void deleteMethod(int re);
 
 }
