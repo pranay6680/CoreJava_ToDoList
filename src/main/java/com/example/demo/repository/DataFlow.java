@@ -1,73 +1,33 @@
 package com.example.demo.repository;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import org.springframework.stereotype.Repository;
 
+import java.util.*;
+
+@Repository
 public class DataFlow {
-    public Map<Integer, String> d1() {
-        return new Map<Integer, String>(){
 
-            @Override
-            public int size() {
-                return 0;
-            }
+    private final Map<Integer, String> hs = new HashMap<>();
 
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean containsKey(Object key) {
-                return false;
-            }
-
-            @Override
-            public boolean containsValue(Object value) {
-                return false;
-            }
-
-            @Override
-            public String get(Object key) {
-                return "";
-            }
-
-            @Override
-            public String put(Integer key, String value) {
-                return "";
-            }
-
-            @Override
-            public String remove(Object key) {
-                return "";
-            }
-
-            @Override
-            public void putAll(Map<? extends Integer, ? extends String> m) {
-
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Set<Integer> keySet() {
-                return Set.of();
-            }
-
-            @Override
-            public Collection<String> values() {
-                return List.of();
-            }
-
-            @Override
-            public Set<Entry<Integer, String>> entrySet() {
-                return Set.of();
-            }
-        };
+    public String save(int key, String value){
+        return hs.put(key,value);
+    }
+    public String retrieve(int key){
+        return hs.get(key);
+    }
+    public void delete(int key){
+        hs.remove(key);
+    }
+    public boolean findKey(int key){
+        return hs.containsKey(key);
+    }
+    public Map<Integer, String> findAll(){
+        return new HashMap<>(hs);
+    }
+    public int items(){
+        return hs.size();
+    }
+    public boolean empty(){
+        return hs.isEmpty();
     }
 }

@@ -2,6 +2,7 @@ package com.example.demo.implementations;
 import com.example.demo.interfaces.ToDoService;
 import com.example.demo.model.DateTime;
 import com.example.demo.model.ToDoModel;
+import com.example.demo.repository.DataFlow;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -12,65 +13,54 @@ public class ToDoServiceImpl implements ToDoService {
 
     ToDoModel tdm = new ToDoModel();
     DateTime dt = new DateTime();
+    private final DataFlow df;
+    private final BufferedReader br;
 
-    private BufferedReader br;
-    private Map<Integer, String> hs;
-
-    public ToDoServiceImpl(BufferedReader br, Map<Integer, String> hs) {
+    public ToDoServiceImpl(BufferedReader br,DataFlow df) {
         this.br = br;
-        this.hs = hs;
+        this.df = df;
     }
 
 
-    public void addMethod(int key, String value) {
+    public Map<Integer, String> addMethod(int key, String value) {
         try {
-                hs.put(key, value + tdm.getCrtd() + dt.getDateTime() + tdm.getStat() + tdm.getStart());
-                for(Map.Entry<Integer, String> h : hs.entrySet()) {
-                System.out.println(h.getKey() + " = " + h.getValue());
-            }
+                df.save(key, value + tdm.getCrtd() + dt.getDateTime() + tdm.getStat() + tdm.getStart());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return df.findAll();
     }
 
-    public void modifyMethod(int key, String modValue) {
+    public Map<Integer, String> modifyMethod(int key, String modValue) {
         try {
                 String creatdt = dt.getDateTime();
                 DateTime dt = new DateTime();
-                hs.put(key, modValue + tdm.getCrtd() + creatdt + tdm.getUpdt() + dt.getDateTime() + tdm.getStat() + tdm.getStart());
-            for(Map.Entry<Integer, String> h : hs.entrySet()) {
-                System.out.println(h.getKey() + " = " + h.getValue());
-            }
+                df.save(key, modValue + tdm.getCrtd() + creatdt + tdm.getUpdt() + dt.getDateTime() + tdm.getStat() + tdm.getStart());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return df.findAll();
     }
 
-        public void statusMethod (int in, String valuePart, String newStatus) {
+        public Map<Integer, String> statusMethod (int in, String valuePart, String newStatus) {
             try {
-                    hs.put(in, valuePart + tdm.getStat() + newStatus);
-                    for(Map.Entry<Integer, String> h : hs.entrySet()) {
-                        System.out.println(h.getKey() + " = " + h.getValue());
-                    }
-
+                    df.save(in, valuePart + tdm.getStat() + newStatus);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            return df.findAll();
         }
-        public void deleteMethod (int re) {
+        public Map<Integer, String> deleteMethod (int re) {
             try {
-                if (hs.containsKey(re)) {
-                    hs.remove(re);
+                if (df.findKey(re)) {
+                    df.delete(re);
                 } else {
                     System.out.println("Entered list num is not matching");
                 }
-                if (hs.isEmpty()) {
-                    System.out.println("list is Empty press 5 to exit");
-                }
-                System.out.println("List contains : " + hs.size() + " items");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            return df.findAll();
         }
     }
 
